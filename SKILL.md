@@ -110,6 +110,49 @@ to security and scalability.
 - [ ] Does the system expose MCP server(s)? (recommended, not required at MVP)
 - [ ] Are events published to a webhook/event bus?
 
+## Default Stack for New Projects (Opinionated)
+
+For **greenfield** projects without legacy stack, start with opinionated defaults rather than open-ended stack selection. This reduces decision fatigue and produces consistent, maintainable systems.
+
+**Two default tracks — choose by SEO/SSR requirement:**
+
+### Track A: YY Default (non-SSR projects)
+
+Use for internal dashboards, admin panels, SPAs, mobile apps, desktop apps, bot control panels, APIs.
+
+- Backend: **TypeScript + Hono + Bun**
+- Frontend (SPA): **Client React + Vite 8** (no SSR, no Next.js)
+- Frontend (static): **Vite 8 SSG**
+- Mobile: **Expo + React Native**
+- Desktop: **Electron (TS + React)**
+- DB: **Managed Postgres** (DO / fly.io / Supabase / Neon) + **Prisma**
+- Storage: **Tigris** or native cloud
+
+Full details + Orgrimmar notes: `references/stacks-yy-default.md`.
+Credit: Сухарев (YY), https://t.me/sukharev_ii.
+
+### Track B: EdTech SaaS (SSR/SEO required)
+
+Use for course platforms, marketing sites, content-heavy public pages.
+
+- Frontend: **Next.js 16** (App Router) — see `references/stacks-frontend.md`
+- Backend: **Node.js 22 + Fastify 5** — see `references/stacks-backend.md`
+- DB: **Postgres** (managed) + Redis for cache/queues
+- Auth: **Clerk / Auth0 / NextAuth** depending on enterprise needs
+
+### Choosing Between Tracks
+
+| Ask | Track |
+|---|---|
+| Does public content need to be indexed by Google? | B |
+| Is there a course catalog / blog / marketing page? | B |
+| Is it an internal tool or authenticated-only product? | **A** |
+| Is it a mobile app? | **A** (Expo) |
+| Is it a desktop app? | **A** (Electron) |
+| Is it a bot control panel or agent UI? | **A** |
+
+**Scale defaults for both tracks:** target 10K users initially. No microservices, no Kubernetes before 10K. Managed DB, managed storage, single service.
+
 ## AI/LLM Integration Architecture
 
 RAG pipelines, AI tutoring patterns, prompt observability, guardrails, vector DB selection.
@@ -198,6 +241,7 @@ Detailed reference for each domain. Load only the relevant file:
 
 | Domain | File | When to read |
 |--------|------|-------------|
+| YY Default | `references/stacks-yy-default.md` | Opinionated default for non-SSR projects (Bun+Hono+Vite+Expo). Source: Сухарев, https://t.me/sukharev_ii |
 | Frontend | `references/stacks-frontend.md` | Stack selection, component choices, data fetching, mobile strategy |
 | Backend | `references/stacks-backend.md` | API design, auth, payments, domain model, multi-tenancy, ORM choice |
 | DevOps | `references/devops.md` | Deployment, CI/CD, observability, environments, backup/DR |

@@ -6,6 +6,23 @@ confidence: high
 
 # Backend
 
+> **Before reading:** if the project is **greenfield non-SSR** (SPA, mobile, desktop, internal API, bot backend), prefer the **YY default stack** in `stacks-yy-default.md` (Bun + Hono). This document covers the **EdTech SaaS / Node track** (Fastify 5 + Node.js 22) — use it when you need mature Node ecosystem (Stripe webhooks, BullMQ, Passport integrations), enterprise auth (Clerk/Auth0), or SSR framework compatibility (Next.js API routes). Credit for YY stack: Сухарев, https://t.me/sukharev_ii.
+
+## When to use this (Node + Fastify) track
+
+- EdTech SaaS with Stripe Billing + Connect
+- BullMQ job queues with Redis
+- Enterprise auth (Clerk, Auth0, SSO/SAML)
+- Multi-tenancy with Postgres RLS at scale
+- Next.js API routes as the web backend
+
+## When to use YY track instead
+
+- Small service, SPA backend, internal tool
+- Want TypeScript runtime without build step (Bun)
+- Prefer Hono minimal framework (~2KB) over Fastify
+- No mature Node ecosystem needed
+
 ## Core Stack
 
 - **Node.js 22 LTS** (или актуальный LTS для стабильности)

@@ -6,6 +6,22 @@ confidence: high
 
 # Frontend
 
+> **Before reading:** if the project is **non-SSR** (internal dashboard, SPA, mobile, desktop, bot UI, no SEO), prefer the **YY default stack** in `stacks-yy-default.md` (Vite + Hono + Bun + Expo). This document covers the **EdTech SaaS / SSR track** (Next.js) — use it when SEO or server rendering is a hard requirement (course catalogs, public content, marketing pages). Credit for YY stack: Сухарев, https://t.me/sukharev_ii.
+
+## When to use this (Next.js) track
+
+- Public content needs Google indexing (course catalogs, blog, marketing)
+- Server-rendered personalization with low TTFB
+- ISR / streaming SSR for fresh content
+- Existing Next.js codebase (e.g., platform-edgelab)
+
+## When to use YY track instead
+
+- Internal / authenticated-only tools
+- Mobile app (Expo)
+- Desktop app (Electron)
+- SPA utilities, admin panels, bot control panels
+
 ## Core Stack
 
 - **Next.js 16** (App Router, Server Components, Partial Prerendering)
